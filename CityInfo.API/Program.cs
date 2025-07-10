@@ -28,7 +28,7 @@ builder.Services.AddControllers(options =>
     options.ReturnHttpNotAcceptable = true;
 }).AddNewtonsoftJson()
 .AddXmlDataContractSerializerFormatters();
-    
+
 
 // Learn more about configuring Swagger/OpenAPI at
 // https://aka.ms/aspnetcore/swashbuckle
@@ -73,7 +73,7 @@ builder.Services.AddDbContext<CityInfoContext>(
     dbContextOptions => dbContextOptions.UseSqlite(
         builder.Configuration["ConnectionStrings:CityInfoDBConnectionString"]));
 
-builder.Services.AddScoped<ICityInfoRepository, CityInfoRepository>();
+builder.Services.AddScoped<ICityInfoRepository, City2InfoRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
