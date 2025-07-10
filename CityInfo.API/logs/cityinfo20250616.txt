@@ -1,0 +1,45 @@
+2025-06-16 10:23:23.956 +09:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.Versioning.ApiVersionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2025-06-16 10:23:24.053 +09:00 [DBG] Hosting starting
+2025-06-16 10:23:24.059 +09:00 [INF] User profile is available. Using '/Users/macbook/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-16 10:23:24.061 +09:00 [DBG] Reading data from file '/Users/macbook/.aspnet/DataProtection-Keys/key-69024f65-5b80-4cf0-bab7-44792014749a.xml'.
+2025-06-16 10:23:24.065 +09:00 [DBG] Reading data from file '/Users/macbook/.aspnet/DataProtection-Keys/key-6f6290b1-3bd2-43ea-be7c-58c13d7e296a.xml'.
+2025-06-16 10:23:24.068 +09:00 [DBG] Reading data from file '/Users/macbook/.aspnet/DataProtection-Keys/key-9fd0a71c-4e69-4351-abc1-a9c68e1087d8.xml'.
+2025-06-16 10:23:24.074 +09:00 [DBG] Reading data from file '/Users/macbook/.aspnet/DataProtection-Keys/key-b577de4e-4980-46da-939a-59ccef05be70.xml'.
+2025-06-16 10:23:24.077 +09:00 [DBG] Reading data from file '/Users/macbook/.aspnet/DataProtection-Keys/key-1c6913b8-f72c-4af5-b6a6-349e1a6e46ba.xml'.
+2025-06-16 10:23:24.080 +09:00 [DBG] Reading data from file '/Users/macbook/.aspnet/DataProtection-Keys/key-14fba3e4-3314-416b-8c09-a032ce4af265.xml'.
+2025-06-16 10:23:24.083 +09:00 [DBG] Reading data from file '/Users/macbook/.aspnet/DataProtection-Keys/key-168a4a21-7713-49cf-8ee1-3361f0813f07.xml'.
+2025-06-16 10:23:24.085 +09:00 [DBG] Reading data from file '/Users/macbook/.aspnet/DataProtection-Keys/key-ad3f901a-a479-451b-90a2-7b1bf9b88e66.xml'.
+2025-06-16 10:23:24.088 +09:00 [DBG] Reading data from file '/Users/macbook/.aspnet/DataProtection-Keys/key-1db3ad3a-d449-4931-a037-87af64223572.xml'.
+2025-06-16 10:23:24.089 +09:00 [DBG] Reading data from file '/Users/macbook/.aspnet/DataProtection-Keys/key-5893ace2-4c84-4302-8280-2ef5e45418c7.xml'.
+2025-06-16 10:23:24.090 +09:00 [DBG] Reading data from file '/Users/macbook/.aspnet/DataProtection-Keys/key-8829c555-6a52-4358-9d7c-f2ccdc0ad5f1.xml'.
+2025-06-16 10:23:24.091 +09:00 [DBG] Reading data from file '/Users/macbook/.aspnet/DataProtection-Keys/key-40fcdd7e-3e58-458b-8a9c-2308ac6123be.xml'.
+2025-06-16 10:23:24.091 +09:00 [DBG] Reading data from file '/Users/macbook/.aspnet/DataProtection-Keys/key-7beea550-9d08-41d4-b7ac-d7b77c5ab2c7.xml'.
+2025-06-16 10:23:24.095 +09:00 [DBG] Found key {69024f65-5b80-4cf0-bab7-44792014749a}.
+2025-06-16 10:23:24.096 +09:00 [DBG] Found key {6f6290b1-3bd2-43ea-be7c-58c13d7e296a}.
+2025-06-16 10:23:24.096 +09:00 [DBG] Found key {9fd0a71c-4e69-4351-abc1-a9c68e1087d8}.
+2025-06-16 10:23:24.097 +09:00 [DBG] Found key {b577de4e-4980-46da-939a-59ccef05be70}.
+2025-06-16 10:23:24.097 +09:00 [DBG] Found key {1c6913b8-f72c-4af5-b6a6-349e1a6e46ba}.
+2025-06-16 10:23:24.097 +09:00 [DBG] Found key {14fba3e4-3314-416b-8c09-a032ce4af265}.
+2025-06-16 10:23:24.097 +09:00 [DBG] Found key {168a4a21-7713-49cf-8ee1-3361f0813f07}.
+2025-06-16 10:23:24.097 +09:00 [DBG] Found key {ad3f901a-a479-451b-90a2-7b1bf9b88e66}.
+2025-06-16 10:23:24.097 +09:00 [DBG] Found key {1db3ad3a-d449-4931-a037-87af64223572}.
+2025-06-16 10:23:24.097 +09:00 [DBG] Found key {5893ace2-4c84-4302-8280-2ef5e45418c7}.
+2025-06-16 10:23:24.097 +09:00 [DBG] Found key {8829c555-6a52-4358-9d7c-f2ccdc0ad5f1}.
+2025-06-16 10:23:24.097 +09:00 [DBG] Found key {40fcdd7e-3e58-458b-8a9c-2308ac6123be}.
+2025-06-16 10:23:24.097 +09:00 [DBG] Found key {7beea550-9d08-41d4-b7ac-d7b77c5ab2c7}.
+2025-06-16 10:23:24.101 +09:00 [DBG] Considering key {5893ace2-4c84-4302-8280-2ef5e45418c7} with expiration date 2025-06-19 01:33:06Z as default key.
+2025-06-16 10:23:24.102 +09:00 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-06-16 10:23:24.107 +09:00 [DBG] Using managed symmetric algorithm 'System.Security.Cryptography.Aes'.
+2025-06-16 10:23:24.107 +09:00 [DBG] Using managed keyed hash algorithm 'System.Security.Cryptography.HMACSHA256'.
+2025-06-16 10:23:24.110 +09:00 [DBG] Using key {5893ace2-4c84-4302-8280-2ef5e45418c7} as the default key.
+2025-06-16 10:23:24.111 +09:00 [DBG] Key ring with default key {5893ace2-4c84-4302-8280-2ef5e45418c7} was loaded during application startup.
+2025-06-16 10:23:25.884 +09:00 [WRN] The ASP.NET Core developer certificate is in an invalid state. To fix this issue, run the following commands 'dotnet dev-certs https --clean' and 'dotnet dev-certs https' to remove all existing ASP.NET Core development certificates and create a new untrusted developer certificate. On macOS or Windows, use 'dotnet dev-certs https --trust' to trust the new certificate.
+2025-06-16 10:23:26.987 +09:00 [ERR] The ASP.NET Core developer certificate is in an invalid state. To fix this issue, run the following commands 'dotnet dev-certs https --clean' and 'dotnet dev-certs https' to remove all existing ASP.NET Core development certificates and create a new untrusted developer certificate. On macOS or Windows, use 'dotnet dev-certs https --trust' to trust the new certificate.
+2025-06-16 10:23:26.993 +09:00 [DBG] Using development certificate: CN=localhost (Thumbprint: 4F14C6C00FAD2B860F0BC1B62973D46AA9CE5505)
+2025-06-16 10:23:27.028 +09:00 [INF] Now listening on: https://localhost:7169
+2025-06-16 10:23:27.028 +09:00 [INF] Now listening on: http://localhost:5169
+2025-06-16 10:23:27.028 +09:00 [DBG] Loaded hosting startup assembly CityInfo.API
+2025-06-16 10:23:27.029 +09:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-16 10:23:27.029 +09:00 [INF] Hosting environment: Development
+2025-06-16 10:23:27.029 +09:00 [INF] Content root path: /Volumes/COMPANY DATA/software/Self Study Materials/Pluralsight/Kevin/asp-dot-net-core-6-web-api-fundamentals/10/demos/end/CityInfo.API/
+2025-06-16 10:23:27.029 +09:00 [DBG] Hosting started
