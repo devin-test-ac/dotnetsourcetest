@@ -1,97 +1,160 @@
 @startuml GetCity Sequence Diagram
 !theme plain
-title GetCity API Endpoint - Sequence Diagram
+title CityInfo API - GetCity Endpoint Sequence Diagram
 
-actor Client
+actor "HTTP Client" as Client
 participant "CitiesController" as Controller
 participant "TestServices" as TestSvc
-participant "ICityInfoRepository" as Repository
-participant "CityInfoRepository" as RepoImpl
+participant "ICityInfoRepository" as IRepo
+participant "CityInfoRepository" as Repo
 participant "CityInfoContext" as DbContext
 participant "SQLite Database" as DB
-participant "IMapper" as Mapper
-participant "AutoMapper" as MapperImpl
+participant "IMapper (AutoMapper)" as Mapper
 
-== Get City Request ==
-Client -> Controller: GET /api/v{version}/cities/{id}?includePointsOfInterest=true
+== HTTP Request Processing ==
+Client -> Controller: GET /api/v{version}/cities/{id}?includePointsOfInterest={bool}
 activate Controller
 
-note over Controller: [Authorize] attribute check\nUser must be authenticated
+note over Controller
+**Authorization Check**
+[Authorize] attribute validates JWT token
+API versioning: v1.0 or v2.0 supported
+end note
 
-Controller -> TestSvc: new TestServices()
+== Business Logic Execution ==
+Controller -> TestSvc: **new TestServices()**
 activate TestSvc
-Controller -> TestSvc: Test()
-note over TestSvc: Execute test logic\n(from code line 54-55)
+Controller -> TestSvc: **Test()**
+note right of TestSvc: Dummy service call\n(Line 54-55 in code)
 TestSvc --> Controller: void
 deactivate TestSvc
 
-Controller -> Repository: GetCityAsync(id, includePointsOfInterest)
-activate Repository
+== Data Retrieval ==
+Controller -> IRepo: **GetCityAsync(id, includePointsOfInterest)**
+activate IRepo
 
-Repository -> RepoImpl: GetCityAsync(id, includePointsOfInterest)
-activate RepoImpl
+IRepo -> Repo: GetCityAsync(id, includePointsOfInterest)
+activate Repo
 
-alt includePointsOfInterest == true
-    RepoImpl -> DbContext: Cities.Include(c => c.PointsOfInterest)\n.Where(c => c.Id == cityId)\n.FirstOrDefaultAsync()
+alt **includePointsOfInterest == true**
+    Repo -> DbContext: **Cities.Include(c => c.PointsOfInterest)**\n**.Where(c => c.Id == cityId)**\n**.FirstOrDefaultAsync()**
     activate DbContext
-    DbContext -> DB: SELECT * FROM Cities c\nLEFT JOIN PointsOfInterest poi ON c.Id = poi.CityId\nWHERE c.Id = {id}
+
+    DbContext -> DB: **SQL Query:**\nSELECT c.*, poi.*\nFROM Cities c\nLEFT JOIN PointsOfInterest poi ON c.Id = poi.CityId\nWHERE c.Id = @id
     activate DB
-    DB --> DbContext: City entity with PointsOfInterest collection
+
+    DB --> DbContext: **City entity + PointsOfInterest collection**
     deactivate DB
-    DbContext --> RepoImpl: City entity
+
+    DbContext --> Repo: **City with PointsOfInterest**
     deactivate DbContext
-else includePointsOfInterest == false
-    RepoImpl -> DbContext: Cities.Where(c => c.Id == cityId)\n.FirstOrDefaultAsync()
+
+else **includePointsOfInterest == false**
+    Repo -> DbContext: **Cities.Where(c => c.Id == cityId)**\n**.FirstOrDefaultAsync()**
     activate DbContext
-    DbContext -> DB: SELECT * FROM Cities WHERE Id = {id}
+
+    DbContext -> DB: **SQL Query:**\nSELECT * FROM Cities\nWHERE Id = @id
     activate DB
-    DB --> DbContext: City entity (without PointsOfInterest)
+
+    DB --> DbContext: **City entity only**
     deactivate DB
-    DbContext --> RepoImpl: City entity
+
+    DbContext --> Repo: **City without PointsOfInterest**
     deactivate DbContext
 end
 
-RepoImpl --> Repository: City entity or null
-deactivate RepoImpl
-Repository --> Controller: City entity or null
-deactivate Repository
+Repo --> IRepo: **City entity or null**
+deactivate Repo
+IRepo --> Controller: **City entity or null**
+deactivate IRepo
 
-alt city == null
-    Controller --> Client: NotFound() - 404 HTTP Response
-else city != null
-    alt includePointsOfInterest == true
-        Controller -> Mapper: Map<CityDto>(city)
+== Response Generation ==
+alt **city == null**
+    Controller --> Client: **HTTP 404 NotFound()**
+    note right: No city found with given ID
+else **city != null**
+    alt **includePointsOfInterest == true**
+        Controller -> Mapper: **Map<CityDto>(city)**
         activate Mapper
-        Mapper -> MapperImpl: Execute mapping configuration\nCity -> CityDto\nPointsOfInterest -> PointOfInterestDto[]
-        activate MapperImpl
-        MapperImpl --> Mapper: CityDto with PointsOfInterest
-        deactivate MapperImpl
-        Mapper --> Controller: CityDto
+
+        note over Mapper
+        **AutoMapper Configuration:**
+        City → CityDto
+        PointsOfInterest → PointOfInterestDto[]
+        Calculates NumberOfPointsOfInterest
+        end note
+
+        Mapper --> Controller: **CityDto with PointsOfInterest**
         deactivate Mapper
-        Controller --> Client: Ok(CityDto) - 200 HTTP Response
-    else includePointsOfInterest == false
-        Controller -> Mapper: Map<CityWithoutPointsOfInterestDto>(city)
+
+        Controller --> Client: **HTTP 200 OK(CityDto)**
+
+    else **includePointsOfInterest == false**
+        Controller -> Mapper: **Map<CityWithoutPointsOfInterestDto>(city)**
         activate Mapper
-        Mapper -> MapperImpl: Execute mapping configuration\nCity -> CityWithoutPointsOfInterestDto
-        activate MapperImpl
-        MapperImpl --> Mapper: CityWithoutPointsOfInterestDto
-        deactivate MapperImpl
-        Mapper --> Controller: CityWithoutPointsOfInterestDto
+
+        note over Mapper
+        **AutoMapper Configuration:**
+        City → CityWithoutPointsOfInterestDto
+        Maps: Id, Name, Description only
+        end note
+
+        Mapper --> Controller: **CityWithoutPointsOfInterestDto**
         deactivate Mapper
-        Controller --> Client: Ok(CityWithoutPointsOfInterestDto) - 200 HTTP Response
+
+        Controller --> Client: **HTTP 200 OK(CityWithoutPointsOfInterestDto)**
     end
 end
 
 deactivate Controller
 
-== Code References ==
-note over Controller
-Based on CitiesController.cs:
-- Line 48-66: GetCity method
-- Line 54-55: TestServices instantiation and call
-- Line 56: Repository call
-- Line 57-59: Null check
-- Line 61-66: Conditional mapping and return
+== Response Examples ==
+note over Client
+**Success with PointsOfInterest (200 OK):**
+{
+  "id": 1,
+  "name": "New York City",
+  "description": "The one with that big park.",
+  "numberOfPointsOfInterest": 2,
+  "pointsOfInterest": [
+    {
+      "id": 1,
+      "name": "Central Park",
+      "description": "The most visited urban park..."
+    },
+    {
+      "id": 2,
+      "name": "Empire State Building",
+      "description": "A 102-story skyscraper..."
+    }
+  ]
+}
+
+**Success without PointsOfInterest (200 OK):**
+{
+  "id": 1,
+  "name": "New York City",
+  "description": "The one with that big park."
+}
+
+**Not Found (404):**
+{
+  "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
+  "title": "Not Found",
+  "status": 404
+}
+end note
+
+== Technical Details ==
+note over Controller, DB
+**Code Location:** CitiesController.cs (Lines 48-66)
+**Route:** [Route("api/v{version:apiVersion}/cities")]
+**Method:** [HttpGet("{id}")]
+**Authorization:** [Authorize] - JWT token required
+**API Versions:** 1.0, 2.0
+**Database:** SQLite with Entity Framework Core
+**ORM:** Entity Framework Core 6.0
+**Mapping:** AutoMapper with custom profiles
 end note
 
 @enduml
