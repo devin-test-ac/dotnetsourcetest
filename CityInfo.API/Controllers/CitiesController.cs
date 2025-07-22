@@ -74,6 +74,30 @@ namespace CityInfo.API.Controllers
 
             return Ok(_mapper.Map<CityWithoutPointsOfInterestDto>(city));
         }
+        /// <summary>
+        /// Delete a city by id
+        /// </summary>
+        /// <param name="id">The id of the city to delete</param>
+        /// <returns>An IActionResult</returns>
+        /// <response code="204">City was successfully deleted</response>
+        /// <response code="404">City not found</response>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult> DeleteCity(int id)
+        {
+            var cityEntity = await _cityInfoRepository.GetCityAsync(id, false);
+            if (cityEntity == null)
+            {
+                return NotFound();
+            }
+
+            _cityInfoRepository.DeleteCity(cityEntity);
+            await _cityInfoRepository.SaveChangesAsync();
+
+            return NoContent();
+        }
+
 
 
     }

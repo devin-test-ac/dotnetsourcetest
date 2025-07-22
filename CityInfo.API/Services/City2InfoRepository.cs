@@ -104,6 +104,11 @@ namespace CityInfo.API.Services
         {
             _context.PointsOfInterest.Remove(pointOfInterest);
         }
+        public void DeleteCity(City city)
+        {
+            _context.Cities.Remove(city);
+        }
+
 
         public async Task<bool> SaveChangesAsync()
         {
